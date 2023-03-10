@@ -11,3 +11,8 @@ Run dev
 Run prod
 
 `docker run -dp 8000:80 backend-worker`
+
+
+Copy .env
+
+`scp .env lab2@143.89.144.31:~/deploy-test/`

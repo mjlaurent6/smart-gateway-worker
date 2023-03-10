@@ -15,10 +15,9 @@ def get_database():
 
 db = get_database()
 
-
 broker = 'broker.emqx.io'
 port = 1883
-topic = "gateway/eui/command"
+topic = "gateway/eui/status"
 # generate client ID with pub prefix randomly
 client_id = f'python-mqtt-{random.randint(0, 100)}'
 # username = 'emqx'
@@ -42,6 +41,7 @@ def connect_mqtt() -> mqtt_client:
 def subscribe(client: mqtt_client):
     def on_message(client, userdata, msg):
         try:
+            print(msg.payload)
             message = json.loads(msg.payload.decode())
             doc = db['gateway-status-history'].insert_one(message)
         except:
